@@ -2,7 +2,11 @@ from pymysql import connect
 import os
 from pymysql.err import OperationalError
 
+from dotenv import load_dotenv
+
 from src.sql_provider import SqlProvider
+
+load_dotenv('.env')
 
 
 db_host = 'mysql_db' if os.getenv('PROD') == "True" else '127.0.0.1'

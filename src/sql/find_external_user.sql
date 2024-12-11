@@ -1,8 +1,7 @@
 SELECT
     id,
-    name,
-    role
-FROM User_INTERNAL
+    name
+FROM User_EXTERNAL
 WHERE 1=1
     AND name='$login'
     AND password='$password'

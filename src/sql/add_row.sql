@@ -1,2 +1,0 @@
-ALTER TABLE Ships
-ADD date DATE;

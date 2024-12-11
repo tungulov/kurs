@@ -74,6 +74,15 @@
         margin-top: 1rem;
         font-size: 0.9em;
       }
+
+      .check-admin {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: black;
+      }
     </style>
   </head>
   <body>
@@ -83,7 +92,14 @@
       <form action="" method="post">
         <input type="text" name="login" placeholder="логин" /><br />
         <input type="password" name="password" placeholder="пароль" /><br />
+        <div class="check-admin">
+          <input type="checkbox" name="is_admin" />
+
+          <h4>Я администратор</h4>
+        </div>
+
         <input type="submit" value="Отправить" />
+
         <span> {{ error }} </span>
       </form>
     </div>
