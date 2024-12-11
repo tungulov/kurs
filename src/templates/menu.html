@@ -63,11 +63,16 @@
   <body>
     <div class="container">
       <span>Меню</span>
+      {% if is_admin %}
       <p>
         <a href="/ships"><button>Перейти к поиску</button></a>
       </p>
       <p>
         <a href="/admin"><button>Отчеты</button></a>
+      </p>
+      {% endif %}
+      <p>
+        <a href="/record"><button>Зарегистрировать корабль</button></a>
       </p>
       <p>
         <a href="/logout"><button>Выйти из системы</button></a>

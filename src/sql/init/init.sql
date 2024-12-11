@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Ships (
 CREATE TABLE IF NOT EXISTS Registration_card (
     id INT AUTO_INCREMENT PRIMARY KEY,
     arrival_date DATE NOT NULL,
-    leaving_date DATE NOT NULL,
+    leaving_date DATE NULL,
     ship_id int NOT NULL,
     employer_id int NOT NULL,
     FOREIGN KEY (ship_id) REFERENCES Ships(id),

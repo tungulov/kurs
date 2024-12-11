@@ -11,7 +11,9 @@ class SqlProvider:
                     open(f'{path}/{file}', 'r').read()
                 )
 
-    def get(self, name, params):
+    def get(self, name, params = None):
         if name not in self._scripts:
             raise ValueError(f'No such sql_template: {name}')
-        return self._scripts[name].substitute(**params)
+        if params:
+            return self._scripts[name].substitute(**params)
+        return self._scripts[name].substitute()
