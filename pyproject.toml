@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "kurs"
+version = "0.1.0"
+description = ""
+authors = ["StanisLove <sta-tun-slav@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^3.1.0"
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.scripts]
+start = "src.app:start"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

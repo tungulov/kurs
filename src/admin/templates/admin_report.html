@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style>
+      /* Общие стили для центрирования содержимого */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        color: #333;
+      }
+
+      /* Контейнер для всего содержимого */
+      .container {
+        text-align: center;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        max-width: 1000px;
+        width: 100%;
+      }
+
+      /* Стили для таблицы */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+      }
+
+      /* Стили для заголовков столбцов */
+      .label td {
+        font-weight: bold;
+        background-color: #457b9d;
+        color: white;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+      }
+
+      /* Стили для строк таблицы */
+      tr {
+        background-color: #f8f9fa;
+      }
+
+      tr:nth-child(even) {
+        background-color: #e9ecef;
+      }
+
+      td {
+        padding: 0.8rem;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      /* Стили для заголовков */
+      h1 {
+        font-size: 1.8em;
+        margin-bottom: 0.5rem;
+        color: #e63946;
+      }
+
+      h4 {
+        margin-bottom: 1.5rem;
+        font-weight: normal;
+        color: #333;
+      }
+
+      /* Стили для селекторов */
+      form select {
+        width: 90%;
+        padding: 0.8rem;
+        margin: 0.5rem 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+        color: #333;
+        background: #f8f9fa;
+      }
+
+      /* Стили для кнопки отправки */
+      form input[type="submit"] {
+        background-color: #457b9d;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 1rem;
+      }
+
+      form input[type="submit"]:hover {
+        background-color: #1d3557;
+      }
+      span {
+        display: block;
+        color: #e63946;
+        margin-top: 1rem;
+        font-size: 0.9em;
+      }
+
+      .link,
+      .link-back {
+        display: inline-block;
+        color: #1d3557;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .link:hover,
+      .link-back:hover {
+        background-color: #457b9d;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Выбор месяца и года</h1>
+      <form action="" method="POST">
+        <select name="month">
+          <option value="1">Январь</option>
+          <option value="2">Февраль</option>
+          <option value="3">Март</option>
+          <option value="4">Апрель</option>
+          <option value="5">Май</option>
+          <option value="6">Июнь</option>
+          <option value="7">Июль</option>
+          <option value="8">Август</option>
+          <option value="9">Сентябрь</option>
+          <option value="10">Октябрь</option>
+          <option value="11">Ноябрь</option>
+          <option value="12">Декабрь</option>
+        </select>
+
+        <select name="year">
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+        </select>
+        {% if render_data %} {% if render_data['status'] %}
+        <table>
+          <tr class="label">
+            {% for column in render_data['ships'][0].keys() %}
+            <td>{{ column }}</td>
+            {% endfor %}
+          </tr>
+          {% for line in render_data['ships'] %}
+          <tr>
+            {% for ship in line %}
+            <td>{{ line[ship] }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+        <a class="link link-back" href="/">Главное меню</a>
+
+        {% else %}
+        <input type="submit" value="Отправить" />
+
+        <span> Нет кораблей по этой дате </span>
+
+        {% endif %} {% else %}
+        <input type="submit" value="Отправить" />
+
+        {% endif %}
+      </form>
+    </div>
+  </body>
+</html>

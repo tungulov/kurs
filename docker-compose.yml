@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile
+    env_file: ".env"
+    environment:
+      - PROD=True
+    command: "start"
+    restart: unless-stopped
+    volumes:
+      - ./backend/images:/app/images
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    networks:
+      - project
+    depends_on:
+      - db
+
+  mysql_db:
+    env_file: ".env"
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - "${MYSQL_ROOT_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+    networks:
+      - project
+    volumes:
+      - ./dbdata:/var/lib/mysql/
+
+  redis:
+    image: redis:latest
+    env_file: ".env"
+    container_name: redis-container
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - project
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+    driver: local
+
+networks:
+  project:
+    driver: bridge

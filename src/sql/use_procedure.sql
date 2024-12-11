@@ -1,0 +1,1 @@
+CALL GetShipsByMonthYear($month, $year);
