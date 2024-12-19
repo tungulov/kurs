@@ -6,6 +6,7 @@ from src.auth.routes import auth_blueprint
 from src.ships.routes import ships_blueprint
 from src.admin.routes import admin_blueprint
 from src.record.routes import record_blueprint
+from src.brigadir.routes import brigadir_blueprint
 from src.access import login_required
 
 
@@ -15,13 +16,14 @@ app.register_blueprint(auth_blueprint, url_preefix='/auth')
 app.register_blueprint(ships_blueprint, url_preefix='/ships')
 app.register_blueprint(admin_blueprint, url_preefix='/admin')
 app.register_blueprint(record_blueprint, url_preefix='/record')
+app.register_blueprint(brigadir_blueprint, url_preefix='/brigadir')
 
 
 @app.route('/', methods=['GET', 'POST'])
 @login_required
 def hello():    
-    is_admin = session['is_admin']
-    return render_template('menu.html', is_admin=is_admin)
+    role = session['role']
+    return render_template('menu.html', role=role)
 
 
 @app.route('/logout')

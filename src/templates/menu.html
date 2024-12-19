@@ -63,7 +63,7 @@
   <body>
     <div class="container">
       <span>Меню</span>
-      {% if is_admin %}
+      {% if role == 'admin' %}
       <p>
         <a href="/admin/ship"><button>Добавить корбаль</button></a>
       </p>
@@ -73,10 +73,14 @@
       <p>
         <a href="/admin"><button>Отчеты</button></a>
       </p>
-      {% endif %}
       <p>
         <a href="/record"><button>Зарегистрировать корабль</button></a>
       </p>
+      {% endif %} {% if role == 'admin' or role == 'brigadir' %}
+      <p>
+        <a href="/logout"><button>Создать бригаду</button></a>
+      </p>
+      {% endif %}
       <p>
         <a href="/logout"><button>Выйти из системы</button></a>
       </p>
