@@ -1,5 +1,7 @@
 from flask import Blueprint, request, render_template
 from src.connection import DBConnection, db_config, provider
+from src.access import admin_required
+
 
 ships_blueprint = Blueprint(
     'ships_bp',
@@ -8,6 +10,7 @@ ships_blueprint = Blueprint(
 )
 
 @ships_blueprint.route('/ships', methods=['GET', 'POST'])
+@admin_required
 def ships():
     if request.method == 'POST':
         ship_tonnage = request.form['ship_tonnage']
@@ -17,7 +20,6 @@ def ships():
         )
         render_data = find_ship_by_tonnage(db_config, sql_statement)
         return render_template('list.html', render_data=render_data)
-
     return render_template('name_form.html')
 
 

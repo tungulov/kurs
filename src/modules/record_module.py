@@ -6,7 +6,7 @@ from src.connection import DBConnection, db_config, provider
 def record_module_get_ships() -> Optional[List]:
     with DBConnection(db_config) as cursor:
         sql_statement = provider.get(
-            'record_ships.sql',
+            'ships_for_record.sql',
         )
 
         cursor.execute(sql_statement)

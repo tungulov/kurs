@@ -1,0 +1,1 @@
+SELECT * FROM Ship_types;

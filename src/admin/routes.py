@@ -2,6 +2,8 @@ from flask import Blueprint, request, render_template, session, redirect
 
 from src.connection import DBConnection, db_config, provider
 from src.access import admin_required
+from src.modules.admin_module import call_procedure
+from src.modules.record_module import record_module_get_ships
 
 
 admin_blueprint = Blueprint(
@@ -28,16 +30,23 @@ def report_handler():
         return render_template('admin_report.html', render_data=render_data)
 
 
-def call_procedure(db_config, sql):
-    with DBConnection(db_config) as cursor:
-        cursor.execute(sql)
-        schema = [column[0] for column in cursor.description]
-        result = [dict(zip(schema,row)) for row in cursor.fetchall()]
-
-        return {
-            'status': True if result else False,
-            'ships': result
-        }
+@admin_blueprint.route('/admin/ship', methods=['GET', 'POST'])
+@admin_required
+def ship_adding_handler():
+    if request.method == 'POST':
+        pass
+        # month = request.form.get('month', '')
+        # year = request.form.get('year', '')
+        # sql_statement = provider.get(
+        #     'use_procedure.sql',
+        #     {'month': month, 'year': year}
+        # )
+        # render_data = call_procedure(db_config, sql_statement)
+       
+        # return render_template('admin_report.html', render_data=render_data)
+    
+    ships = record_module_get_ships()
+    return render_template('add_ship.html', ships=ships)
 
 @admin_blueprint.route('/no_admin', methods=['GET', 'POST'])
 def no_admin_handler():

@@ -1,1 +1,1 @@
-CALL GetShipsByMonthYear($month, $year);
+CALL GetRegistrationCardsByMonthAndYear($month, $year);
