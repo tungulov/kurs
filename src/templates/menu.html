@@ -65,16 +65,13 @@
       <span>Меню</span>
       {% if role == 'admin' %}
       <p>
-        <a href="/admin/ship"><button>Добавить корбаль</button></a>
+        <a href="/admin/ship"><button>Корабли</button></a>
       </p>
       <p>
-        <a href="/ships"><button>Найти корбаль</button></a>
+        <a href="/admin/worker"><button>Сотрудники</button></a>
       </p>
       <p>
-        <a href="/admin"><button>Отчеты</button></a>
-      </p>
-      <p>
-        <a href="/record"><button>Зарегистрировать корабль</button></a>
+        <a href="/admin/reports"><button>Отчеты</button></a>
       </p>
       {% endif %} {% if role == 'admin' or role == 'brigadir' %}
       <p>
