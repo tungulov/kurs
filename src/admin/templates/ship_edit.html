@@ -109,9 +109,9 @@
   </head>
   <body class="page-container">
     <div class="container">
-      <h1>Добавить новый корабль</h1>
+      <h1>{{'Изменить корабль' if ship else 'Добавить новый корабль'}}</h1>
 
-      <form action="/admin/ship/add" method="post">
+      <form action="" method="post">
         <!-- Поле для имени корабля -->
         <input
           type="text"
@@ -119,6 +119,7 @@
           placeholder="Имя корабля"
           class="input-field"
           required
+          value="{{ship[1] if ship else ''}}"
         />
 
         <!-- Поле для тоннажа -->
@@ -128,6 +129,7 @@
           placeholder="Тоннаж"
           class="input-field"
           required
+          value="{{ship[2] if ship else ''}}"
         />
 
         <!-- Поле для домашнего порта -->
@@ -137,17 +139,25 @@
           placeholder="Домашний порт"
           class="input-field"
           required
+          value="{{ship[3] if ship else ''}}"
         />
 
         <!-- Селектор для типа корабля -->
-        <select name="ship_type" class="dropdown" required>
+        <select
+          name="ship_type"
+          class="dropdown"
+          required
+        >
           <option value="">Выберите тип корабля</option>
           {% for type in ship_types %}
-          <option value="{{type[0]}}">{{type[1]}}</option>
+          <option value="{{type[0]}}" {% if type[0] == ship[4] %}selected{% endif %}>{{type[1]}}</option>
           {% endfor %}
         </select>
-
+        {% if ship %}
+        <button type="submit">Изменить</button>
+        {% else %}
         <button type="submit">Добавить корабль</button>
+        {% endif %}
       </form>
 
       <a class="link link-back" href="/admin/ship">Назад к списку кораблей</a>

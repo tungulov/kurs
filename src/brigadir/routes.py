@@ -2,7 +2,7 @@ from flask import Blueprint, request, render_template, session, redirect
 
 from src.connection import DBConnection, db_config, provider
 from src.access import admin_required, brigadir_required
-from src.modules.admin_module import call_procedure
+from src.modules.ship_module import call_procedure
 
 
 brigadir_blueprint = Blueprint(

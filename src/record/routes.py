@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, session, redirect
 from src.connection import DBConnection, db_config, provider
 
-from src.modules.admin_module import get_ships
+from src.modules.ship_module import get_ships
 from src.modules.record_module import record_module_add_record
 
 record_blueprint = Blueprint(

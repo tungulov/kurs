@@ -27,10 +27,40 @@ def get_ships() -> Optional[List]:
         return result
     
 
+def get_ship(ship_id) -> Optional[List]:
+    with DBConnection(db_config) as cursor:
+        sql_statement = provider.get(
+            'find_ship_with_types.sql', {'id' : ship_id}
+        )
+        cursor.execute(sql_statement)
+        return cursor.fetchone()
+    
+
+def delete_ship(ship_id) -> Optional[List]:
+    with DBConnection(db_config) as cursor:
+        sql_statement = provider.get(
+            'delete_ship.sql', {'ship_id' : ship_id}
+        )
+        cursor.execute(sql_statement)
+
 def add_ship(ship_name, tonnage, home_port, ship_type_id):
     with DBConnection(db_config) as cursor:
         sql_statement = provider.get(
             'add_ship.sql', {
+                "ship_name" : ship_name,
+                "tonnage" : tonnage,
+                "home_port" : home_port,
+                "ship_type_id" : ship_type_id
+            }
+        )
+        cursor.execute(sql_statement)
+
+
+def edit_ship(ship_id, ship_name, tonnage, home_port, ship_type_id):
+    with DBConnection(db_config) as cursor:
+        sql_statement = provider.get(
+            'edit_ship.sql', {
+                'ship_id' : ship_id,
                 "ship_name" : ship_name,
                 "tonnage" : tonnage,
                 "home_port" : home_port,

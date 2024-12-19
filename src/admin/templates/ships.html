@@ -27,7 +27,7 @@
         padding: 2rem;
         border-radius: 10px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        max-width: 1000px;
+        max-width: 1200px;
         width: 100%;
       }
 
@@ -117,6 +117,36 @@
         color: white;
       }
 
+      .edit {
+        display: inline-block;
+        color: #1d3557;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        padding: 5px 7px;
+        border-radius: 5px;
+      }
+
+      .edit:hover {
+        background-color: #457b9d;
+        color: white;
+      }
+
+      .delete {
+        display: inline-block;
+        color: #1d3557;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        padding: 5px 7px;
+        border-radius: 5px;
+      }
+
+      .delete:hover {
+        background-color: red;
+        color: white;
+      }
+
       /* Стили для выпадающего списка */
       .dropdown {
         margin-bottom: 1rem;
@@ -136,14 +166,52 @@
       <table>
         <tr class="label">
           {% for column in ships[0].keys() %}
-          <td>{{ column }}</td>
+          <td>{{ ship_labels[column] }}</td>
           {% endfor %}
+          <td></td>
+          <td></td>
         </tr>
         {% for line in ships %}
         <tr>
           {% for ship in line %}
           <td>{{ line[ship] }}</td>
           {% endfor %}
+          <td>
+            <a href="/admin/ship/edit/{{line['id']}}">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6 edit"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+                />
+              </svg>
+            </a>
+          </td>
+          <td>
+            <a href="/admin/ship/delete/{{line['id']}}">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6 delete"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </a>
+          </td>
         </tr>
         {% endfor %}
       </table>
