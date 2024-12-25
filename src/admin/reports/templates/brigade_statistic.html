@@ -114,7 +114,7 @@
 
   <body>
     <div class="container">
-      <span>Отчет о продуктивности сотрудников за месяц</span>
+      <span>Отчет о разгруженных кораблях за месяц</span>
 
       <form action="" method="POST">
         <div>
@@ -146,26 +146,31 @@
       <table>
         <thead>
           <tr>
-            <th>Имя</th>
-            <th>Профессия</th>
-            <th>Всего часов</th>
-            <th>Часто разгружаемое судно</th>
+            <th>Бригада</th>
+            <th>Дата работы</th>
+            <th>Статус</th>
+            <th>Название судна</th>
+            <th>Тоннаж</th>
+            <th>Домашний порт</th>
+            <th>Тип судна</th>
           </tr>
         </thead>
         <tbody>
           {% for row in statistic %}
           <tr>
-            <td>{{ row.user_name }}</td>
-            <td>{{ row.profession }}</td>
-            <td>{{ row.total_hours if row.total_hours else 0 }}</td>
-            <td>{{ row.most_frequent_ship }}</td>
+            <td>{{ row.brigade_id }}</td>
+            <td>{{ row.work_date }}</td>
+            <td>{{ row.status }}</td>
+            <td>{{ row.ship_name }}</td>
+            <td>{{ row.tonnage }}</td>
+            <td>{{ row.home_port }}</td>
+            <td>{{ row.ship_type }}</td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
 
       {% else %}
-
       <h4>Данных не найдено</h4>
       {% endif %}
 
