@@ -24,7 +24,7 @@ def admin_required(func):
 def brigadir_required(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        if 'role' in session and session['role'] == 'brigadir':
+        if 'role' in session and (session['role'] == 'brigadir' or session['role'] == 'admin'):
             return func(*args, **kwargs)
         return redirect(url_for('brigadir_bp.no_brigadir_handler'))
     return wrapper
