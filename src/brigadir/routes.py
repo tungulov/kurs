@@ -1,9 +1,9 @@
 from flask import Blueprint, request, render_template, session, redirect
 
 from src.access import brigadir_required
-from src.modules.brigadir_module import add_brigade, get_workers, get_all_brigades_with_ship_and_employees_count
+from src.modules.brigadir_module import add_brigade, get_brigade_with_ship_and_workers, get_workers, get_all_brigades_with_ship_and_employees_count, set_brigade_data
 from src.modules.ship_module import get_ships
-from src.common.table_naming import employee_labels
+from src.common.table_naming import employee_labels, brigades_labels
 
 
 brigadir_blueprint = Blueprint(
@@ -39,8 +39,25 @@ def new_brigade_handler():
 @brigadir_required
 def info_brigade_handler():
     brigades = get_all_brigades_with_ship_and_employees_count()
-    print(brigades)
-    return render_template('brigadir.html', employees=brigades, employee_labels=employee_labels)
+    return render_template('brigades_info.html', brigades=brigades, brigades_labels=brigades_labels)
+
+
+@brigadir_blueprint.route('/about/<int:brigade_id>', methods=['GET', 'POST'])
+@brigadir_required
+def brigade_about_handler(brigade_id: int):
+    employees = get_brigade_with_ship_and_workers(brigade_id)
+
+    if request.method == 'POST':
+        status = request.form.get('status')
+        selected_brigade_employers = []
+        for key in request.form:
+            if 'hours_' in key:
+                selected_brigade_employers.append([int(key.split('_')[-1]), request.form[key]])
+        
+        set_brigade_data(brigade_id, selected_brigade_employers, status)
+        return redirect('/brigade/info')
+
+    return render_template('brigades_about.html', brigades=employees)
 
 
 @brigadir_blueprint.route('/no_brigadir', methods=['GET'])

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Создать бригаду</title>
+    <style>
+      /* Центрирование содержимого и стили для фона */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        color: #333;
+        padding: 2rem;
+      }
+
+      /* Контейнер для страницы */
+      .container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1200px;
+        flex-direction: column; /* Используем column для вертикального расположения */
+        align-items: center; /* Центрируем по горизонтали */
+        margin-bottom: 2rem; /* Оставляем место для кнопки */
+      }
+
+      /* Контейнер для информации о бригаде и корабле */
+      .info-block {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        width: 100%;
+        max-width: 600px; /* Ограничиваем максимальную ширину */
+        text-align: center; /* Выравниваем текст по центру */
+      }
+
+      /* Контейнер для таблицы работников */
+      .table-block {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        flex: 2;
+        width: 100%;
+        max-width: 800px; /* Ограничиваем максимальную ширину */
+        margin-top: 2rem; /* Добавляем отступ сверху */
+      }
+
+      /* Блок для селектора статуса */
+      .status-block {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
+        margin-top: 2rem; /* Отступ сверху */
+      }
+
+      /* Заголовки блоков */
+      h1 {
+        font-size: 1.8em;
+        color: #e63946;
+        margin-bottom: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.4em;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      h4 {
+        margin-bottom: 1.5rem;
+        font-weight: normal;
+        color: #333;
+      }
+
+      /* Стили для таблицы */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+      }
+
+      /* Стили для заголовков столбцов */
+      .label td {
+        font-weight: bold;
+        background-color: #457b9d;
+        color: white;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+      }
+
+      /* Стили для строк таблицы */
+      tr {
+        background-color: #f8f9fa;
+      }
+
+      tr:nth-child(even) {
+        background-color: #e9ecef;
+      }
+
+      td {
+        padding: 0.8rem;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      /* Редактируемое поле для hours */
+      input[type="number"] {
+        padding: 0.4rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        width: 80%;
+        text-align: center;
+        background-color: #f8f9fa;
+        transition: background-color 0.3s;
+      }
+
+      input[type="number"]:focus {
+        background-color: #fff;
+        border-color: #457b9d;
+      }
+
+      /* Стили для выпадающего списка статуса */
+      select {
+        padding: 0.6rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        width: 80%;
+        background-color: #f8f9fa;
+        transition: background-color 0.3s;
+      }
+
+      select:focus {
+        background-color: #fff;
+        border-color: #457b9d;
+      }
+
+      /* Кнопка главного меню */
+      .link-back {
+        display: inline-block;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0.8rem 2rem;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .link-back:hover {
+        background-color: #1d3557;
+      }
+
+      button {
+        background-color: #457b9d;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 1rem;
+        margin-bottom: 20px;
+      }
+
+      button:hover {
+        background-color: #1d3557;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="container" action="" method="post">
+      <div class="info-block">
+        <h1>Информация о бригаде и корабле</h1>
+        {% if brigades %}
+        <p><strong>Название корабля:</strong> {{ brigades[0].ship_name }}</p>
+        <p><strong>Тоннаж:</strong> {{ brigades[0].tonnage }} т</p>
+        <p><strong>Порт приписки:</strong> {{ brigades[0].home_port }}</p>
+        <p>
+          <strong>Дата работы:</strong> {{
+          brigades[0].work_date.strftime('%d.%m.%Y') }}
+        </p>
+        <p><strong>Статус:</strong> {{ brigades[0].status }}</p>
+        {% else %}
+        <h4>Бригад не найдено</h4>
+        {% endif %}
+      </div>
+
+      <div class="table-block">
+        <h2>Таблица работников</h2>
+
+        {% if brigades %}
+        <table>
+          <tr class="label">
+            <td>Имя работника</td>
+            <td>Должность</td>
+            <td>Часы</td>
+          </tr>
+          {% for line in brigades %}
+          <tr>
+            <td>{{ line.employer_name }}</td>
+            <td>{{ line.employer_profession }}</td>
+            <td>
+              <input
+                type="number"
+                name="hours_{{ line.employee_id }}"
+                value="{{ line.hours if line.hours else '' }}"
+                min="0"
+                step="1"
+              />
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+        <h4>Работников не найдено</h4>
+        {% endif %}
+      </div>
+
+      <!-- Блок для выбора статуса -->
+      <div class="status-block">
+        <h2>Выберите статус бригады</h2>
+        <label for="status">Статус:</label>
+        <select name="status" id="status">
+          <option value="в работе" {% if brigades[0].status == 'в работе' %}selected{% endif %}>В работе</option>
+          <option value="выполнено" {% if brigades[0].status == 'выполнено' %}selected{% endif %}>Выполнено</option>
+        </select>
+      </div>
+
+      <button type="submit">Сохранить изменения</button>
+
+      <a class="link-back" href="/brigade/info">Назад</a>
+    </form>
+  </body>
+</html>

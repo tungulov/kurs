@@ -48,3 +48,38 @@ def get_all_brigades_with_ship_and_employees_count():
         result = [dict(zip(schema,row)) for row in cursor.fetchall()]
         
         return result
+    
+
+def get_brigade_with_ship_and_workers(brigade_id: int):
+    with DBConnection(db_config) as cursor:
+        sql_statement = provider.get(
+            'get_brigade_with_ship_and_workers.sql', {
+                'id' : brigade_id
+            }
+        )
+        cursor.execute(sql_statement)
+
+        schema = [column[0] for column in cursor.description]
+        result = [dict(zip(schema,row)) for row in cursor.fetchall()]
+        
+        return result
+    
+
+def set_brigade_data(brigade_id: int, selected_brigade_employers: List, status: str):
+    with DBConnection(db_config) as cursor:
+        sql_statement = provider.get(
+            'edit_brigade_status.sql', {
+                'id' : brigade_id,
+                'status' : status
+            }
+        )
+        cursor.execute(sql_statement)
+
+        for brigade_employee in selected_brigade_employers:
+            sql_statement = provider.get(
+                'edit_birgade_employee_hour.sql', {
+                    'id' : brigade_employee[0],
+                    'hours' : brigade_employee[1]
+                }
+            )
+            cursor.execute(sql_statement)

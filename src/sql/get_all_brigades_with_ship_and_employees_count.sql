@@ -1,8 +1,8 @@
 SELECT 
     B.id AS brigade_id,
     B.work_date,
-    B.status,
     S.ship_name,
+    B.status,
     S.tonnage,
     COUNT(Be.id) AS employees_count
 FROM 
