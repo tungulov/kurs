@@ -7,11 +7,12 @@ from src.modules.auth_module import auth_module
 auth_blueprint = Blueprint(
     'auth_bp',
     __name__,
-    template_folder='templates'
+    template_folder='templates',
+    url_prefix='/auth'
 )
 
 
-@auth_blueprint.route('/auth', methods=['GET', 'POST'])
+@auth_blueprint.route('/', methods=['GET', 'POST'])
 def login_handler():
     if request.method == 'GET':
         return render_template('auth_login.html')
