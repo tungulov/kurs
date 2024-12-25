@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Меню</title>
+    <style>
+      /* Центрирование содержимого и стили для фона */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        color: #333;
+      }
+
+      /* Контейнер для выравнивания и стилей */
+      .container {
+        text-align: center;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        width: 100%;
+      }
+
+      /* Стили для заголовка меню */
+      .container span {
+        display: block;
+        font-size: 1.8em;
+        color: #e63946;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Стили для кнопок */
+      .container button {
+        background-color: #457b9d;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+
+      .container button:hover {
+        background-color: #1d3557;
+      }
+
+      /* Стили для ссылок */
+      .container a {
+        text-decoration: none;
+      }
+
+      .admin-func {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        max-width: 300px;
+        margin: 10px 0 40px 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .admin-func p {
+        width: 100%;
+      }
+
+      .admin-label {
+        font-size: 20px !important;
+        color: #222 !important;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0 !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <span>Отчеты</span>
+      <p>
+        <a href="/admin/reports/employees_statistic">
+          <button>Статистика работников</button>
+        </a>
+      </p>
+      <p>
+        <a href="/"><button>Главное меню</button></a>
+      </p>
+    </div>
+  </body>
+</html>

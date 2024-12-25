@@ -38,18 +38,14 @@ def add_employee(fio, name, password, employee_type):
                 'name' : name,
                 'password' : password,
                 'fio' : fio,
-                'profession' : profession,
-                'role' : employee_type,   
+                'profession' : employee_type,
+                'role' : employee_types[employee_type],   
             }
         )
         cursor.execute(sql_statement)
 
 
 def edit_employee(id, fio, name, password, employee_type, restore_employee):
-    for type in employee_types:
-        if employee_types[type] == employee_type:
-           profession = type
-
     with DBConnection(db_config) as cursor:
         sql_statement = provider.get(
             'edit_employee.sql',
@@ -58,8 +54,8 @@ def edit_employee(id, fio, name, password, employee_type, restore_employee):
                 'name' : name,
                 'password' : password,
                 'fio' : fio,
-                'profession' : profession,
-                'role' : employee_type,   
+                'profession' : employee_type,
+                'role' : employee_types[employee_type],   
             }
         )
         cursor.execute(sql_statement)

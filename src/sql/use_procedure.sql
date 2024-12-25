@@ -1,1 +1,0 @@
-CALL GetRegistrationCardsByMonthAndYear($month, $year);

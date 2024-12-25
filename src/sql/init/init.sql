@@ -30,8 +30,11 @@ CREATE TABLE IF NOT EXISTS Brigade (
     id INT AUTO_INCREMENT PRIMARY KEY,
     work_date DATE NOT NULL,
     ship_id INTEGER NOT NULL,
+    status text,
     FOREIGN KEY (ship_id) REFERENCES Ship(id)
 );
+
+
 
 CREATE TABLE IF NOT EXISTS BrigadeEmployees(
     id INT AUTO_INCREMENT PRIMARY KEY,

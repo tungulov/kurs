@@ -42,7 +42,6 @@ def ship_edit_handler(employee_id: int):
         password = request.form.get('password', '')
         employee_type = request.form.get('employee_type', '')
         restore_employee = request.form.get('restore_employee', 'off')
-        
         edit_employee(employee_id, fio, name, password, employee_type, restore_employee)
         return redirect('/admin/employee')
     

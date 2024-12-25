@@ -12,4 +12,6 @@ JOIN
 LEFT JOIN 
     BrigadeEmployees Be ON B.id = Be.brigade_id
 GROUP BY 
-    B.id, B.work_date, S.ship_name, S.tonnage;
+    B.id, B.work_date, S.ship_name, S.tonnage
+ORDER BY
+    B.id;

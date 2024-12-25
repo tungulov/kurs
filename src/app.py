@@ -3,9 +3,7 @@ import os
 from flask import Flask, render_template, session
 
 from src.auth.routes import auth_blueprint
-from src.ships.routes import ships_blueprint
 from src.admin.routes import admin_blueprint
-from src.record.routes import record_blueprint
 from src.brigadir.routes import brigadir_blueprint
 from src.access import login_required
 
@@ -15,10 +13,6 @@ app.secret_key = 'my_super_secret_key'
 app.register_blueprint(auth_blueprint)
 app.register_blueprint(admin_blueprint)
 app.register_blueprint(brigadir_blueprint)
-
-app.register_blueprint(ships_blueprint, url_preefix='/ships')
-app.register_blueprint(record_blueprint, url_preefix='/record')
-
 
 @app.route('/', methods=['GET', 'POST'])
 @login_required

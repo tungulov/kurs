@@ -26,5 +26,7 @@ employee_labels = {
 
 employee_types = {
     'Бригадир' : 'brigadir', 
-    'Работник': 'employee'
+    'Разнорабочий': 'employee',
+    'Электрик': 'employee',
+    'Монтажник': 'employee',
 }

@@ -153,7 +153,7 @@
         >
           <option value="">Выберите профессию сотрудника</option>
           {% for type in employee_types %}
-          <option value="{{employee_types[type]}}" {% if employee_types[type] == employee[-2] %}selected{% endif %}>{{type}}</option>
+          <option value="{{type}}" {% if type == employee[3] %}selected{% endif %}>{{type}}</option>
           {% endfor %}
         </select>
 
