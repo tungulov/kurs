@@ -1,0 +1,1 @@
+CALL GetUnloadedShipsStatsByMonthYear($month, $year);

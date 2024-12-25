@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Меню</title>
+    <style>
+      /* Ваши стили, без изменений */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        color: #333;
+      }
+
+      .container {
+        text-align: center;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        max-width: 1200px;
+        width: 100%;
+      }
+
+      .container span {
+        display: block;
+        font-size: 1.8em;
+        color: #e63946;
+        margin-bottom: 1.5rem;
+      }
+
+      .container button {
+        background-color: #457b9d;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        width: 350px;
+        margin: 0.5rem 0;
+      }
+
+      .container button:hover {
+        background-color: #1d3557;
+      }
+
+      .container a {
+        text-decoration: none;
+      }
+
+      /* Стили для формы выбора месяца и года */
+      form select {
+        padding: 0.5rem;
+        margin: 0.5rem;
+        font-size: 1rem;
+        border-radius: 5px;
+      }
+
+      .admin-func {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        max-width: 300px;
+        margin: 10px 0 40px 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .admin-func p {
+        width: 350px;
+      }
+
+      .admin-label {
+        font-size: 20px !important;
+        color: #222 !important;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0 !important;
+      }
+
+      /* Стили для таблицы */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 0.8rem;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f4f4f4;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <span>Статистика о разгрузках кораблей за месяц</span>
+
+      <form action="" method="POST">
+        <div>
+          <select name="month">
+            <option value="1">Январь</option>
+            <option value="2">Февраль</option>
+            <option value="3">Март</option>
+            <option value="4">Апрель</option>
+            <option value="5">Май</option>
+            <option value="6">Июнь</option>
+            <option value="7">Июль</option>
+            <option value="8">Август</option>
+            <option value="9">Сентябрь</option>
+            <option value="10">Октябрь</option>
+            <option value="11">Ноябрь</option>
+            <option value="12">Декабрь</option>
+          </select>
+
+          <select name="year">
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+          </select>
+        </div>
+        <button type="submit">Выбрать</button>
+      </form>
+
+      {% if statistic %}
+      <table>
+        <thead>
+          <tr>
+            <th>Бригада</th>
+            <th>Дата работы</th>
+            <th>Статус</th>
+            <th>Название судна</th>
+            <th>Тоннаж</th>
+            <th>Домашний порт</th>
+            <th>Тип судна</th>
+            <th>Количество разгрузок</th>
+            <th>Среднее время разгрузки (часы)</th>
+            <th>Макс. время разгрузки (часы)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in statistic %}
+          <tr>
+            <td>{{ row.user_id }}</td>
+            <td>{{ row.work_date }}</td>
+            <td>{{ row.brigade_status }}</td>
+            <td>{{ row.ship_name }}</td>
+            <td>{{ row.tonnage }}</td>
+            <td>{{ row.home_port }}</td>
+            <td>{{ row.ship_type }}</td>
+            <td>{{ row.unload_count }}</td>
+            <td>{{ row.avg_unload_hours }}</td>
+            <td>{{ row.max_unload_hours }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% else %}
+      <h4>Данных не найдено</h4>
+      {% endif %}
+
+      <p>
+        <a href="/admin/reports"><button>Отчеты</button></a>
+      </p>
+    </div>
+  </body>
+</html>

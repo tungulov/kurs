@@ -34,8 +34,6 @@ CREATE TABLE IF NOT EXISTS Brigade (
     FOREIGN KEY (ship_id) REFERENCES Ship(id)
 );
 
-
-
 CREATE TABLE IF NOT EXISTS BrigadeEmployees(
     id INT AUTO_INCREMENT PRIMARY KEY,
     brigade_id int NOT NULL,

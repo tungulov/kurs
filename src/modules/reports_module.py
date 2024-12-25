@@ -23,7 +23,24 @@ def employee_statistic(month: int, year: int) -> Optional[List]:
 def task_statistic(month: int, year: int) -> Optional[List]:
     with DBConnection(db_config) as cursor:
         sql_statement = provider.get(
-            'use_task_statistic_procedure copy.sql', {
+            'use_task_statistic_procedure.sql', {
+                'month' : month,
+                'year' : year
+            }
+        )
+
+        cursor.execute(sql_statement)
+        
+        schema = [column[0] for column in cursor.description]
+        result = [dict(zip(schema,row)) for row in cursor.fetchall()]
+        
+        return result
+    
+
+def ship_statistic(month: int, year: int) -> Optional[List]:
+    with DBConnection(db_config) as cursor:
+        sql_statement = provider.get(
+            'use_ship_statistic_procedure.sql', {
                 'month' : month,
                 'year' : year
             }
