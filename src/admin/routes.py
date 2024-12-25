@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template, session, redirect
 from src.access import admin_required
 from src.admin.ship.routes import admin_ships_blueprint
+from src.admin.employees.routes import admin_employees_blueprint
 
 admin_blueprint = Blueprint(
     'admin_bp',
@@ -10,6 +11,8 @@ admin_blueprint = Blueprint(
 )
 
 admin_blueprint.register_blueprint(admin_ships_blueprint)
+admin_blueprint.register_blueprint(admin_employees_blueprint)
+
 
 @admin_blueprint.route('/', methods=['GET', 'POST'])
 @admin_required

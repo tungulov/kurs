@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <style>
+      /* Общие стили */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        color: #333;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        max-width: 1000px;
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 1.8em;
+        color: #e63946;
+        margin-bottom: 1.5rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .input-field,
+      .dropdown {
+        width: 500px;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 1rem 0;
+        box-sizing: border-box;
+      }
+
+      button {
+        background-color: #457b9d;
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin: 0.5rem 0;
+      }
+
+      button:hover {
+        background-color: #1d3557;
+      }
+
+      .link,
+      .link-back {
+        display: inline-block;
+        color: #1d3557;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .link:hover,
+      .link-back:hover {
+        background-color: #457b9d;
+        color: white;
+      }
+
+      .fired-data {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 500px;
+        margin: 10px 0 40px 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .fired-data label {
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+        gap: 0.5rem;
+      }
+
+      .fired-data input[type="checkbox"] {
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{'Изменить сотрудника' if employee else 'Добавить нового сотрудника'}}</h1>
+
+      <form action="" method="post">
+        <input
+          type="text"
+          name="fio"
+          placeholder="ФИО"
+          class="input-field"
+          required
+          value="{{employee[-1] if employee else ''}}"
+        />
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Имя пользователя"
+          class="input-field"
+          required
+          value="{{employee[1] if employee else ''}}"
+        />
+
+        <input
+          type="text"
+          name="password"
+          placeholder="Пароль"
+          class="input-field"
+          required
+          value="{{employee[2] if employee else ''}}"
+        />
+
+        <select
+          name="employee_type"
+          class="dropdown"
+          required
+        >
+          <option value="">Выберите профессию сотрудника</option>
+          {% for type in employee_types %}
+          <option value="{{employee_types[type]}}" {% if employee_types[type] == employee[-2] %}selected{% endif %}>{{type}}</option>
+          {% endfor %}
+        </select>
+
+        {% if employee and employee[5] %}
+        <div class="fired-data">
+          <span>Работник уволен: {{employee[5].strftime('%d.%m.%Y')}}</span>
+          <label style="margin-top: 15px;">
+            <input type="checkbox" name="restore_employee"/> Восстановить сотрудника
+          </label>
+        </div>
+        {% endif %}
+
+        <button type="submit">{{'Изменить сотрудника' if employee else 'Добавить сотрудника'}}</button>
+      </form>
+
+      <a class="link link-back" href="/admin/employee">Назад к сотрудникам</a>
+    </div>
+  </body>
+</html>
