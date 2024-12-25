@@ -57,6 +57,31 @@
       .container a {
         text-decoration: none;
       }
+
+      .admin-func {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        max-width: 300px;
+        margin: 10px 0 40px 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .admin-func p {
+        width: 100%;
+      }
+
+      .admin-label {
+        font-size: 20px !important;
+        color: #222 !important;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0 !important;
+      }
     </style>
   </head>
 
@@ -64,15 +89,18 @@
     <div class="container">
       <span>Меню</span>
       {% if role == 'admin' %}
-      <p>
-        <a href="/admin/ship"><button>Корабли</button></a>
-      </p>
-      <p>
-        <a href="/admin/employee"><button>Сотрудники</button></a>
-      </p>
-      <p>
-        <a href="/admin/reports"><button>Отчеты</button></a>
-      </p>
+      <div class="admin-func">
+        <span class="admin-label">Функционал Администратора</span>
+        <p>
+          <a href="/admin/ship"><button>Корабли</button></a>
+        </p>
+        <p>
+          <a href="/admin/employee"><button>Сотрудники</button></a>
+        </p>
+        <p>
+          <a href="/admin/reports"><button>Отчеты</button></a>
+        </p>
+      </div>
       {% endif %} {% if role == 'admin' or role == 'brigadir' %}
       <p>
         <a href="/brigade/new"><button>Создать бригаду</button></a>

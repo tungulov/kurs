@@ -14,10 +14,10 @@ app = Flask(__name__)
 app.secret_key = 'my_super_secret_key'
 app.register_blueprint(auth_blueprint)
 app.register_blueprint(admin_blueprint)
+app.register_blueprint(brigadir_blueprint)
 
 app.register_blueprint(ships_blueprint, url_preefix='/ships')
 app.register_blueprint(record_blueprint, url_preefix='/record')
-app.register_blueprint(brigadir_blueprint, url_preefix='/brigadir')
 
 
 @app.route('/', methods=['GET', 'POST'])
