@@ -4,6 +4,7 @@ ship_labels = {
     'tonnage' : 'тоннаж',
     'home_port' : 'порт приписки',
     'ship_type_name' : 'тип корабля',
+    'unloaded_date' : 'Дата разгрузки'
 }
 
 brigades_labels = {

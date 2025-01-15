@@ -173,9 +173,11 @@
         </tr>
         {% for line in ships %}
         <tr>
-          {% for ship in line %}
+          {% for ship in line %} {% if line[ship] %}
           <td>{{ line[ship] }}</td>
-          {% endfor %}
+          {% else %}
+          <td>{{ '-' }}</td>
+          {% endif %} {% endfor %}
           <td>
             <a href="/admin/ship/edit/{{line['id']}}">
               <svg

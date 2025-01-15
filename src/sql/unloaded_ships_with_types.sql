@@ -11,5 +11,7 @@ JOIN
     Ship_types 
 ON 
     Ship.ship_type_id = Ship_types.id
+WHERE 
+    Ship.unloaded_date IS NULL
 ORDER BY 
     Ship.id;

@@ -27,6 +27,22 @@ def get_ships() -> Optional[List]:
         return result
     
 
+def get_unloaded_ships(date_created) -> Optional[List]:
+    with DBConnection(db_config) as cursor:
+        sql_statement = provider.get(
+            'unloaded_ships_with_types.sql', {
+                  'date_created' : date_created
+            }
+        )
+
+        cursor.execute(sql_statement)
+        
+        schema = [column[0] for column in cursor.description]
+        result = [dict(zip(schema,row)) for row in cursor.fetchall()]
+        
+        return result
+    
+
 def get_ship(ship_id) -> Optional[List]:
     with DBConnection(db_config) as cursor:
         sql_statement = provider.get(

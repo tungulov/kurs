@@ -166,15 +166,32 @@
         border-radius: 5px;
         width: 500px;
       }
+
+      /* Стили для поля даты */
+      .date-picker {
+        margin-bottom: 1.5rem;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 500px;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <form action="" method="post">
         <h1>Создать бригаду для разгрузки корабля</h1>
+        <h4>Выберите дату создания бригады:</h4>
+        <input class="date-picker" type="date" name="date_created" required />
 
+        {% if not ships %}
+        <a href="/admin/employee/add"><button>Выбрать дату</button></a>
+
+        <h4 class="error">Необходимо выбрать дату</h4>
+        {% else %} {% if len_ships > 0 %}
         <h4>Выберите корабль:</h4>
-
         <select class="dropdown" name="ship_id">
           {% for ship in ships %}
           <option value="{{ ship.id }}">{{ ship.ship_name }}</option>
@@ -206,6 +223,11 @@
         {% endif %}
 
         <a href="/admin/employee/add"><button>Создать бригаду</button></a>
+
+        {% else %}
+        <h4 class="error">Все корабли разгружены</h4>
+        {% endif %} {% endif %}
+
         <a class="link link-back" href="/">Главное меню</a>
       </form>
     </div>

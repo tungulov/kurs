@@ -57,21 +57,3 @@ def ship_edit_handler(ship_id: int):
 def ship_delete_handler(ship_id: int):   
     delete_ship(ship_id)
     return redirect('/admin/ship')
-
-
-# @admin_blueprint.route('/admin/reports', methods=['GET', 'POST'])
-# @admin_required
-# def report_handler():
-#     if request.method == 'GET':
-#         return render_template('admin_report.html', error = "")
-#     else:
-#         month = request.form.get('month', '')
-#         year = request.form.get('year', '')
-#         sql_statement = provider.get(
-#             'use_procedure.sql',
-#             {'month': month, 'year': year}
-#         )
-#         render_data = call_procedure(db_config, sql_statement)
-       
-#         return render_template('admin_report.html', render_data=render_data)
-   
