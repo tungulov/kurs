@@ -1,5 +1,7 @@
+import json
 from typing import List, Optional
 from src.connection import DBConnection, db_config, provider
+from src.redis_provider import r
 
 
 def call_procedure(db_config, sql):
@@ -12,8 +14,13 @@ def call_procedure(db_config, sql):
             'status': True if result else False,
             'ships': result
         }
+    
 
-def get_ships() -> Optional[List]:
+def get_ships(resave: bool = False) -> Optional[List]:
+    ships = r.get('ships')
+    if ships and not resave:
+        return json.loads(ships)
+
     with DBConnection(db_config) as cursor:
         sql_statement = provider.get(
             'ships_with_types.sql',
@@ -24,6 +31,13 @@ def get_ships() -> Optional[List]:
         schema = [column[0] for column in cursor.description]
         result = [dict(zip(schema,row)) for row in cursor.fetchall()]
         
+        ships_fix_date = result
+        for ship in ships_fix_date:
+            if ship['unloaded_date']:
+                ship['unloaded_date'] = ship['unloaded_date'].strftime('%Y-%m-%d')
+
+        ships_str = json.dumps(result)
+        r.set('ships', ships_str)
         return result
     
 
@@ -70,6 +84,8 @@ def add_ship(ship_name, tonnage, home_port, ship_type_id):
             }
         )
         cursor.execute(sql_statement)
+
+    get_ships(True)
 
 
 def edit_ship(ship_id, ship_name, tonnage, home_port, ship_type_id):
